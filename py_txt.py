@@ -50,15 +50,15 @@ def txt_py(file_name):
             print("| -~- Error! Please check required permission. -~- |")
         return False
     
-    elif file_name.lower()=="p":
-        a = os.environ["PATH"]
-        a = a.split(sep=";")
-
-        print(f'\n'.join(a))
+    elif file_name.lower()=="ls":
+        directory = input("Type directory name: ")
+        a = os.listdir(directory)
+        a = '\n'.join(a)
+        print(a)
         return False
 
     elif file_name.lower()=="i":
-        print(f"\npy.txt")
+        print(f"\nJSONreader")
         print(f"MADE WITH PYTHON 3.11.4 | Current Python version: {sys.version:.6}")
         print(f"Being imported: Yes\nFile path: {__file__}")
         return False
@@ -83,7 +83,7 @@ def txt_py(file_name):
         with open(file_name, 'a') as file:
             file.write("\n" + write)
 
-print("r - Rename file\ndel - Delete file\nrdir - Rename directory\nmk - Create new folder\nrm - Delete folder\np - View PATH")
-print("i - Info")
+print("r - Rename file\ndel - Delete file\nmk - Create new folder\nrdir - Rename directory\nrm - Delete folder")
+print("ls - List contents of a directory\ni - Info")
 name_of_file = str(input("Enter file name to make new file, edit or enter one of the modes above: "))
 txt_py(name_of_file)

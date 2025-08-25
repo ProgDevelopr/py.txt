@@ -12,7 +12,7 @@ def txt_py(file_name):
             os.rename(old_file_name, new_file_name)
         return False
    
-    elif file_name.lower()=="del":
+    elif file_name.lower()=="rm":
         name = input("File name: ")
         if os.path.exists(name) and os.path.isfile(name):
             os.remove(name)
@@ -25,12 +25,12 @@ def txt_py(file_name):
             os.rename(old_folder_name, new_folder_name)
         return False
     
-    elif file_name.lower()=="mk":
+    elif file_name.lower()=="mkdir":
         new_folder_name = str(input("New folder (dir) name: "))
         os.mkdir(new_folder_name)
         return False
 
-    elif file_name.lower()=="rm":
+    elif file_name.lower()=="rmdir":
         try:
             name = input("Folder name: ")
             if not name:
@@ -51,10 +51,21 @@ def txt_py(file_name):
         return False
     
     elif file_name.lower()=="ls":
-        directory = input("Type directory name: ")
-        a = os.listdir(directory)
-        a = '\n'.join(a)
-        print(a)
+        print("Current directory content: ")
+        b = os.listdir()
+        b = '\n'.join(b)
+        print(b)
+        specific = input("Would you like to list a specific directory in your directory? (y or n): ")
+        if specific.lower()=="y":
+            try:
+                direct = input("Directory name: ")
+                a = os.listdir(direct)
+                a = '\n'.join(a)
+                print(f"Contents of {direct}:\n{a}")
+            except OSError as ose:
+                print(f"| -~- Error! {ose}. -~- |")
+        elif specific.lower()=="n":
+            return False
         return False
 
     elif file_name.lower()=="i":
@@ -83,7 +94,7 @@ def txt_py(file_name):
         with open(file_name, 'a') as file:
             file.write("\n" + write)
 
-print("r - Rename file\ndel - Delete file\nmk - Create new folder\nrdir - Rename directory\nrm - Delete folder")
+print("r - Rename file\nrm - Delete file\nmkdir - Create new folder\nrdir - Rename directory\nrmdir - Delete folder")
 print("ls - List contents of a directory\ni - Info")
 name_of_file = str(input("Enter file name to make new file, edit or enter one of the modes above: "))
 txt_py(name_of_file)
